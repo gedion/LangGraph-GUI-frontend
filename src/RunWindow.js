@@ -1,11 +1,14 @@
 // RunWindow.js
 
 import React, { useState, useEffect } from 'react';
+import { useGraphManager } from './GraphManagerContext';
 
 function RunWindow({ onClose }) {
   const [responseMessage, setResponseMessage] = useState('');
   const [running, setRunning] = useState(false);
-
+  const {
+    filename
+  } = useGraphManager();
   const handleRun = async () => {
     if (running) return;
     setRunning(true);
@@ -15,6 +18,10 @@ function RunWindow({ onClose }) {
       console.log("Attempting to send request to Flask server...");
       const response = await fetch('http://127.0.0.1:5000/run', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // Specify JSON in the request
+        },
+        body: JSON.stringify({file: filename })
       });
 
       if (!response.body) {
@@ -95,7 +102,9 @@ function RunWindow({ onClose }) {
         <button onClick={handleStop} disabled={!running}>Stop</button>
         <button onClick={handleCancel}>Cancel</button>
         <div style={styles.response}>
-          <pre>{responseMessage}</pre>
+          <pre
+            dangerouslySetInnerHTML={{ __html: responseMessage}}
+          />
         </div>
       </div>
     </div>

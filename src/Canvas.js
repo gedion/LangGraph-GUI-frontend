@@ -21,6 +21,7 @@ function Canvas() {
     onNodesChange,
     nodeIdCounter,
     setNodeIdCounter,
+    setFilename,
   } = useGraphManager();
 
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
@@ -139,7 +140,7 @@ function Canvas() {
   };
 
   const handleLoad = async () => {
-    await loadJson(setEdges, setNodes, setNodeIdCounter);
+    await loadJson(setEdges, setNodes, setNodeIdCounter, setFilename);
   };
 
   const handleRun = () => {

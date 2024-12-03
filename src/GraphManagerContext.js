@@ -11,6 +11,7 @@ export const useGraphManager = () => {
 export const GraphManagerProvider = ({ children }) => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [nodeIdCounter, setNodeIdCounter] = useState(1);
+  const [filename, setFilename] = useState('graph.json');
 
   const value = {
     nodes,
@@ -18,6 +19,8 @@ export const GraphManagerProvider = ({ children }) => {
     onNodesChange,
     nodeIdCounter,
     setNodeIdCounter,
+    filename,
+    setFilename
   };
 
   return (

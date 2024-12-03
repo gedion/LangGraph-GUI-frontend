@@ -28,7 +28,7 @@ export const saveJson = async (nodes, nodeIdCounter) => {
   alert('Flow saved!');
 };
 
-export const loadJson = async (setEdges, setNodes, setNodeIdCounter) => {
+export const loadJson = async (setEdges, setNodes, setNodeIdCounter, setFilename) => {
   const [fileHandle] = await window.showOpenFilePicker({
     types: [
       {
@@ -74,4 +74,5 @@ export const loadJson = async (setEdges, setNodes, setNodeIdCounter) => {
 
   // Set node counter
   setNodeIdCounter(flowData.node_counter || 1);
+  setFilename(file.name)
 };
